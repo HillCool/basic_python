@@ -5,14 +5,14 @@
 ### 目录：
 
 ##### * 简单介绍
-#####1. 安装
+##### 1. 安装
 Linux ```sudo -y yum install python```  
 mac ```brew install python```  
 window ```官网下载安装```
-#####2. python shell
+##### 2. python shell
 进入python shell ```python```  
 退出python shell ```exit()```  
-#####3. 语法糖  [学习流程根据廖雪峰老师的博客](https://www.liaoxuefeng.com/wiki/1016959663602400)
+##### 3. 语法糖  [学习流程根据廖雪峰老师的博客](https://www.liaoxuefeng.com/wiki/1016959663602400)
 3.1 变量   
 &emsp;大小写都可 eg： a = 1 b = 'abc',无需用‘,’分割  
 3.2  
@@ -62,6 +62,6 @@ wait context
 1.excel工具
 #####5. 阅读一个github的python项目
 1.excel工具  
-2.爬虫项目
+2.爬虫项目[爬虫参考这个知乎](https://zhuanlan.zhihu.com/p/21479334/)
 #####6. 引用资料
 
