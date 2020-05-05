@@ -126,5 +126,46 @@ def exercise():
 # 以下函数允许计算两个数的乘积，请稍加改造，变成可接收一个或多个数并计算乘积：
 # def product(x, y):
 #     return x * y
-def product(x, y, defalut=1):
-    return x * y * defalut
+# def product(x, y, defalut=1):
+#     return x * y * defalut
+
+def product(a, b=1, c=1, d=1, e=1):
+    return a * b * c * d * e
+
+
+# 测试
+print('product(5) =', product(5))
+print('product(5, 6) =', product(5, 6))
+print('product(5, 6, 7) =', product(5, 6, 7))
+print('product(5, 6, 7, 9) =', product(5, 6, 7, 9))
+if product(5) != 5:
+    print('测试失败!')
+elif product(5, 6) != 30:
+    print('测试失败!')
+elif product(5, 6, 7) != 210:
+    print('测试失败!')
+elif product(5, 6, 7, 9) != 1890:
+    print('测试失败!')
+else:
+    try:
+        product()
+        print('测试失败!')
+    except TypeError:
+        print('测试成功!')
+
+
+# 请编写move(n, a, b, c)函数，它接收参数n，表示3个柱子A、B、C中第1个柱子A的盘子数量，然后打印出把所有盘子从A借助B移动到C的方法，例如：
+# 现在，游戏整个过程以“移动最大盘子”为中央，被分为了两部分。
+# 即（前）“将那坨N-1个盘子从A针移动到B针”，
+#   (中)“移动最大盘子”，
+#   (后)“将坨N-1个盘子从B针移动到C针”。
+def move(n, a, b, c):
+    if n == 1:
+        print(a, '-->', c)
+    else:
+        move(n - 1, a, c, b)  #
+        move(1, a, b, c)  #
+        move(n - 1, b, a, c)
+
+
+move(3, 'A', 'B', 'C')
