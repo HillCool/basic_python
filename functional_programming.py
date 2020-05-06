@@ -162,13 +162,137 @@ def by_name(t):
     return t
 
 
-L2 = sorted(L, key=by_name, reverse=true)
-print(L2)
-
-
 def by_score(t):
     return t[-1]
 
 
-L3 = sorted(L, key=by_score, reverse=true)
-print(L3)
+def test5():
+    L2 = sorted(L, key=by_name, reverse=true)
+    print(L2)
+    L3 = sorted(L, key=by_score, reverse=true)
+    print(L3)
+
+
+# test5()
+# ------------------------- function programming advance--------------------------
+##返回函数
+# 闭包 (难点)
+# 1、来理解
+def count1():
+    fs = []
+    for i in range(1, 4):
+        def f():
+            return i * i
+
+        fs.append(f)
+    print(i)  # 在这里把这个log打出来，就清晰了
+    return fs
+
+
+def test1():
+    f1 = count1()
+    print(f1)
+    for f in f1:
+        print(f())
+
+
+# test1()
+
+# 2、修改一把
+def count2():
+    fs = []
+    for i in range(1, 4):
+        def f(i2):
+            print(i2)  # 看，我把i当参数传进来了，保存在了f函数，作为局部变量了，直接算出结果了。
+            return i2 * i2
+
+        fs.append(f(i))
+    return fs
+
+
+def test2():
+    f1 = count2()
+    print(f1)
+
+
+# test2()
+
+# 3、再修改一把
+def count3():
+    fs = []
+    for i in range(1, 4):
+        fs.append(f(i))
+    return fs
+
+
+def f(i):
+    return i ** 2
+
+
+def test3():
+    f1 = count3()
+    print(f1)
+
+
+# test3()
+
+# 2、3 结果一毛一样
+
+# 4、再修改一把
+def count():
+    def f(j):
+        def g():
+            return j * j
+
+        return g
+
+    fs = []
+    for i in range(1, 4):
+        fs.append(f(i))  # f(i)立刻被执行，因此i的当前值被传入f()
+    return fs
+
+
+def test4():
+    f1 = count
+    f2 = count
+    f3 = count
+    print(f1())
+    print(f2())
+    print(f3())
+
+
+# exercise
+# 6. 利用闭包返回一个计数器函数，每次调用它返回递增整数：
+def nums():  ##无限自然数
+    n = -1
+    while True:
+        n = n + 1
+        yield n
+
+
+def createCounter():
+    it = nums()
+
+    def counter():
+        return next(it)
+
+    return counter
+
+
+# 测试:
+def test6():
+    counterA = createCounter()
+    l = []
+    a = nums()
+    # for n in list(range(1, 100)):
+    #     l.append(next(a))
+    # print(l)
+    print(counterA(), counterA(), counterA(), counterA(), counterA())  # 1 2 3 4 5
+    counterB = createCounter()
+    if [counterB(), counterB(), counterB(), counterB()] == [1, 2, 3, 4]:
+        print('测试通过!')
+    else:
+        print('测试失败!')
+
+
+test6()
