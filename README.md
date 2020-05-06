@@ -59,7 +59,7 @@ wait context
 &emsp;3.6.1 切片  
 &emsp;wait context   
 #####4. 编写一个程序
-1.excel工具
+1.excel
 #####5. 阅读一个github的python项目
 1.excel工具  
 2.爬虫项目[爬虫参考这个知乎](https://zhuanlan.zhihu.com/p/21479334/)
