@@ -261,10 +261,39 @@ def test4():
     print(f3())
 
 
+# 匿名函数
+list(map(lambda x: x * x, [1, 2, 3]))
+
+# 装饰器
+import functools
+
+
+def log(func):
+    @functools.wraps(func)  # try delete raw
+    def wrapper(*args, **kw):
+        print('call %s()' % func.__name__)
+        return func(*args, **kw)
+
+    return wrapper
+
+
+@log
+def now():
+    print('2015-3-25')
+
+
+print(now.__name__)
+now()
+
+# 偏函数
+int2 = functools.partial(int, base=2)
+print(int2('1000000'))
+
+
 # exercise
 # 6. 利用闭包返回一个计数器函数，每次调用它返回递增整数：
 def nums():  ##无限自然数
-    n = -1
+    n = 0
     while True:
         n = n + 1
         yield n
@@ -296,3 +325,60 @@ def test6():
 
 
 test6()
+
+# 请用匿名函数改造下面的代码：
+# def is_odd(n):
+#     return n % 2 == 1
+#
+# L = list(filter(is_odd, range(1, 20)))
+L = list(filter(lambda n: n % 2 == 1, range(1, 20)))
+
+
+def test7():
+    print(L)
+
+
+test7()
+
+# 请设计一个decorator，它可作用于任何函数上，并打印该函数的执行时间：
+import time
+
+
+def metric(Text):
+    def do_metric(fn):
+        @functools.wraps(fn)
+        def wrapper(*args):
+            t1 = time.time()
+            res = fn(*args)
+            t2 = time.time()
+            print('%s %s executed in %s ms' % (Text, fn.__name__, t2 - t1))
+            return res
+
+        return wrapper
+
+    return do_metric
+
+
+# 测试
+@metric("这是个快函数")
+def fast(x, y):
+    time.sleep(0.0012)
+    return x + y;
+
+
+@metric("这是个慢函数")
+def slow(x, y, z):
+    time.sleep(0.1234)
+    return x * y * z;
+
+
+def test8():
+    f = fast(11, 22)
+    s = slow(11, 22, 33)
+    if f != 33:
+        print('测试失败!')
+    elif s != 7986:
+        print('测试失败!')
+
+
+test8()
